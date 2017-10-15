@@ -1,0 +1,25 @@
+:local .claims {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  :global {
+    .claims-toolbar {
+      flex: 0 0 auto;
+      padding-left: 4px;
+    }
+    .claims-content {
+      flex: 1 1 100%;
+      .claims-list {
+        overflow-y: auto;
+        height: 100%;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .claim-info {
+        padding: 8px;
+      }
+    }
+
+  }
+}

@@ -8,6 +8,7 @@ import {autobind} from "core-decorators";
 import {Api} from "../../api/api";
 import {appStore} from "../../app";
 import {ObservableComponent} from "../../utils/mobx/ObservableComponent";
+import {Claims} from "./claims/claims";
 
 export class Home extends ObservableComponent {
 
@@ -21,25 +22,14 @@ export class Home extends ObservableComponent {
 
   renderContent() {
     return (
-      <Card>
-        <CardHeader title="React fullstack ts"/>
-        <CardContent>
-          <Button raised
-                  onClick={this.onTestClick}>
-            test api
-          </Button>
-        </CardContent>
-      </Card>
+      <Claims/>
+
     );
   }
 
   render() {
     return (
-      <Grid container justify="center" spacing={0}>
-        <Grid item xs={11} lg={9}>
-          {this.renderContent()}
-        </Grid>
-      </Grid>
+      <Claims/>
 
     );
   }

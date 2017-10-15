@@ -1,0 +1,26 @@
+:local .app {
+
+  height: 100vh;
+  background-color: #eeeeee;
+  //padding-left: 8px;
+  //padding-right: 8px;
+
+  :global .app-grid-container {
+    height: 100%;
+    > .app-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      > .app-header {
+        flex: 0 0 auto;
+        .tittle {
+          flex: 1;
+        }
+      }
+      > .app-main {
+        flex: 1 1 100%;
+        overflow-y: auto
+      }
+    }
+  }
+}

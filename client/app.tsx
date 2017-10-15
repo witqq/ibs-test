@@ -9,6 +9,7 @@ import Grid from "material-ui/Grid";
 import {AppHeader} from "./views/app-header";
 import {SnackBarView} from "./views/snack-bar-view";
 import "normalize.css/normalize.css"
+import {app} from "./app.less";
 
 export const appStore = AppStore.create();
 
@@ -22,13 +23,17 @@ export default class App extends Component {
     return (
       <HashRouter>
         <Provider {...appStore}>
-          <div>
-            <Grid container justify="center" className="app-container" >
-              <Grid className={"header"} item xs={12} lg={9} style={{paddingLeft: -8, paddingRight: -8}}>
-                <AppHeader/>
-              </Grid>
-              <Grid item xs={12} lg={9}>
-                {this.renderRoutes()}
+          <div className={app}>
+            <Grid container align="center"
+                  className="app-grid-container"
+                  direction="row"
+                  justify="center"
+                  spacing={0}>
+              <Grid item xs={12} lg={9} className="app-container">
+                <AppHeader className="app-header"/>
+                <div className="app-main">
+                  {this.renderRoutes()}
+                </div>
                 <SnackBarView/>
               </Grid>
             </Grid>
