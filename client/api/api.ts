@@ -1,9 +1,8 @@
 import Axios, {AxiosRequestConfig} from "axios";
 import {appStore} from "../app";
+import {API_PATH} from "../../share/constants";
 
-const API_URL = "api/";
-
-Axios.defaults.baseURL = API_URL;
+Axios.defaults.baseURL = API_PATH;
 
 Axios.interceptors.response.use(function (response) {
   return response;

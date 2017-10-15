@@ -1,7 +1,7 @@
 import {Router, Application, Response, Request} from "express";
 import {ApiError} from "../utils/api-error";
+import {API_PATH} from "../../share/constants";
 
-const API_PATH = "/api";
 const apiRouter = Router();
 
 apiRouter.get("/test", function (req, res, next) {
