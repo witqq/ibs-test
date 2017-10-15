@@ -22,7 +22,7 @@ export class Home extends ObservableComponent {
   renderContent() {
     return (
       <Card>
-        <CardHeader title="Чат с ботом"/>
+        <CardHeader title="React fullstack ts"/>
         <CardContent>
           <Button raised
                   onClick={this.onTestClick}>
