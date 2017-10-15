@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "jsx": "react",
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "outDir": "dist/server",
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.collection"
+    ],
+    "experimentalDecorators": true
+  },
+  "include": [
+    "server/**/*",
+    "share/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "target",
+    "ts-compile",
+    "client/**/*"
+  ]
+}

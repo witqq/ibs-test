@@ -1,0 +1,4 @@
+{
+  "ext": "ts",
+  "exec": "ts-node -P tsconfig-server.json ./server/index.ts"
+}
