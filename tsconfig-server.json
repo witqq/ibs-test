@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "jsx": "react",
+    "target": "es6",
     "module": "commonjs",
     "noImplicitAny": false,
     "outDir": "dist/server",
     "lib": [
       "dom",
       "es5",
+      "es6",
       "es2015.collection"
     ],
     "experimentalDecorators": true
