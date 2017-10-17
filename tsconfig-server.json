@@ -3,7 +3,7 @@
     "target": "es6",
     "module": "commonjs",
     "noImplicitAny": false,
-    "outDir": "dist/server",
+    "outDir": "dist",
     "lib": [
       "dom",
       "es5",
