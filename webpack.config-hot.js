@@ -8,6 +8,7 @@ const LessPluginAutoPrefix = require('less-plugin-autoprefix');
 
 const config = {
     entry: [
+        "react-hot-loader/patch",
         "./client/index.tsx"
     ],
     output: {
@@ -31,6 +32,10 @@ const config = {
             chunksSortMode: "dependency",
             template: path.resolve(__dirname, "./client/index-template.html"),
             hash: true
+        }),
+        new WebpackBuildNotifierPlugin({
+            title: "Hot Reload build",
+            suppressWarning: true
         })
     ],
 
@@ -90,6 +95,15 @@ const config = {
             {test: /\.cur(\?.+)?$/, loader: "file-loader"},
         ]
     },
+
+    devServer: {
+        hot: true,
+        port: 3000,
+        proxy: {
+            "/api": "http://localhost:8080"
+        },
+        historyApiFallback: true
+    }
 
 };
 

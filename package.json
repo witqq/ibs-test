@@ -8,7 +8,7 @@
     "start": "node ./dist/server/index.js",
     "heroku-postbuild": "tsc  -p tsconfig-server.json && webpack -p",
     "server-watch-ts": "nodemon",
-    "client-watch": "webpack-dev-server",
+    "client-watch": "webpack-dev-server --config webpack.config-hot.js",
     "client-build": "webpack"
   },
   "resolutions": {
