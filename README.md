@@ -5,6 +5,7 @@ https://floating-fortress-27111.herokuapp.com
 ## Требования
  - node.js v6.11.0
  - npm v3.10.10
+ - yarn 0.27.5 
  - не занятый порт 8080
  
 ## Инструкция
@@ -16,9 +17,13 @@ https://floating-fortress-27111.herokuapp.com
 
 `cd ibs-test`
 
+Если в системе не установлен yarn, выполнить установку
+
+`npm install yarn -g`
+
 Установить все зависимости
 
-`npm install`
+`yarn`
 
 Запустить сборку 
 
