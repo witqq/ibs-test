@@ -31,7 +31,13 @@ const config = {
             chunksSortMode: "dependency",
             template: path.resolve(__dirname, "./client/index-template.html"),
             hash: true
-        })
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin()
     ],
 
     module: {
