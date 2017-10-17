@@ -23,6 +23,12 @@ apiRouter.get("/claims", function (req, res, next) {
   res.json(getClaims());
 });
 
+apiRouter.get("/claims", function (req, res, next) {
+  res.json(getClaims());
+});
+
+
+
 apiRouter.get("/claim/:id", function (req, res, next) {
   const id = req.params.id;
   const claim = getClaimById(id);

@@ -2,6 +2,7 @@ import Axios, {AxiosRequestConfig} from "axios";
 import {appStore} from "../app";
 import {API_PATH} from "../../share/constants";
 import {Claim} from "../../share/data/interfaces/claim";
+import {Person} from "../../share/data/interfaces/person";
 
 Axios.defaults.baseURL = API_PATH;
 
@@ -68,5 +69,13 @@ export class Api {
 
   public static removeClaim(claim: Claim) {
     return this.delete<Claim>(`claim/${claim.id}`, claim);
+  }
+
+  public static getPeople() {
+    return this.Get<Array<Person>>(`people`);
+  }
+
+  public static getStauses() {
+    return this.Get<Array<Person>>(`claimStatuses`);
   }
 }

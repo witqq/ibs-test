@@ -25,13 +25,13 @@ export const ClaimModel = types.model({
       self.docNum = docNum;
     },
     setFrom(person: Person) {
-      self.from = PersonModel.create(person);
+      self.from = person && PersonModel.create(person) || undefined;
     },
     setTo(person: Person) {
-      self.to = PersonModel.create(person);
+      self.to = person && PersonModel.create(person) || undefined;
     },
     setStatus(status: ClaimStatus) {
-      self.status = StatusModel.create(status);
+      self.status = status && StatusModel.create(status) || undefined;
     },
     generateUuid() {
       self.tempUuid = v4();
@@ -54,7 +54,7 @@ export function claimChanged(claim1: ClaimModel, claim2: ClaimModel): boolean {
   }
   return claim1.docNum !== claim2.docNum
     || claim1.name !== claim2.name
-    || claim1.from.id !== claim2.from.id
-    || claim1.to.id !== claim2.to.id
-    || claim1.status.id !== claim2.status.id
+    || ((claim1.from && claim1.from.id) !== (claim2.from && claim2.from.id))
+    || ((claim1.to && claim1.to.id) !== (claim2.to && claim2.to.id))
+    || ((claim1.status && claim1.status.id) !== (claim2.status && claim2.status.id))
 }

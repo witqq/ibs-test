@@ -9,6 +9,10 @@ import Button from "material-ui/Button";
 import {computed} from "mobx";
 import {ClaimsStore, CLAIMS_STORE} from "../../../stores/claims-store";
 import {injectStore} from "../../../stores/inject-store";
+import {PersonSelectControl} from "../../../controls/person-select-control";
+import {StatusSelectControl} from "../../../controls/status-select-control";
+import {ClaimStatus} from "../../../../share/data/interfaces/claim-status";
+import {Person} from "../../../../share/data/interfaces/person";
 
 export class ClaimCard extends ObservableComponent {
   @injectStore(CLAIMS_STORE)
@@ -43,6 +47,21 @@ export class ClaimCard extends ObservableComponent {
     this.claimsStore.saveSelected();
   }
 
+  @autobind
+  onStatusSelect(value: ClaimStatus) {
+    this.view.setStatus(value);
+  }
+
+  @autobind
+  onFromSelect(value: Person) {
+    this.view.setFrom(value);
+  }
+
+  @autobind
+  onToSelect(value: Person) {
+    this.view.setTo(value);
+  }
+
   render() {
     if (!this.view) {
       return (
@@ -57,20 +76,36 @@ export class ClaimCard extends ObservableComponent {
           <TextField label="Номер"
                      value={this.view.docNum}
                      onChange={this.onDocNumChange}
-                     margin="normal"/>
+                     margin="normal"
+                     fullWidth/>
           <br/>
           <TextField label="Наименование"
                      value={this.view.name}
                      onChange={this.onNameChange}
-                     margin="normal"/>
-          <CardActions disableActionSpacing>
-            <Button raised
-                    disabled={!this.changed}
-                    onClick={this.save}>
-              Сохранить
-            </Button>
-          </CardActions>
+                     margin="normal"
+                     fullWidth/>
+          <br/>
+          <PersonSelectControl value={this.view.from}
+                               label="От кого"
+                               id="from"
+                               onSelect={this.onFromSelect}/>
+          <PersonSelectControl value={this.view.to}
+                               label="Кому"
+                               id="to"
+                               onSelect={this.onToSelect}/>
+          <StatusSelectControl value={this.view.status}
+                               label="Статус"
+                               id="status"
+                               onSelect={this.onStatusSelect}/>
+
         </CardContent>
+        <CardActions disableActionSpacing>
+          <Button raised
+                  disabled={!this.changed}
+                  onClick={this.save}>
+            Сохранить
+          </Button>
+        </CardActions>
       </Card>
     );
   }
