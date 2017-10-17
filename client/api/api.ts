@@ -43,11 +43,13 @@ export class Api {
     return Axios.get(url, myConfig as AxiosRequestConfig).then(res => res.data)
   }
 
-
   private static put<T>(url: string, args): Promise<T> {
     return Axios.put(url, args).then(res => res.data);
   }
 
+  private static delete<T>(url: string, args): Promise<T> {
+    return Axios.delete(url, args).then(res => res.data);
+  }
 
   public static test() {
     return this.Get<WithMessage>("test");
@@ -58,9 +60,13 @@ export class Api {
   }
 
   public static saveClaim(claim: Claim) {
-    if (!claim.id){
+    if (!claim.id) {
       return this.post<Claim>("claim", claim);
     }
     return this.put<Claim>(`claim/${claim.id}`, claim);
+  }
+
+  public static removeClaim(claim: Claim) {
+    return this.delete<Claim>(`claim/${claim.id}`, claim);
   }
 }

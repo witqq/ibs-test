@@ -32,7 +32,7 @@ export class Confirm extends ObservableComponent {
                      transition={<Slide direction="up"/>}
                      keepMounted
                      onRequestClose={this.cancel}>
-        <DialogTitle>Внимание</DialogTitle>
+        <DialogTitle>Подтвердите действие</DialogTitle>
         <DialogContent>
           <DialogContentText>
             {confirmStore.message}

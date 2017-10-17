@@ -15,7 +15,8 @@ export const ClaimsStore = types.model({
 })
   .views(self => ({
     get selected(): ClaimModel {
-      return self.claims.find(claim => claim.id == self.selectedClaimId)
+      return self.claims.find(claim => claim.id == self.selectedClaimId ||
+        claim.tempUuid == self.selectedClaimId)
     }
   }))
   .views(self => ({
@@ -25,8 +26,20 @@ export const ClaimsStore = types.model({
   }))
   .actions(self => ({
     setSelectedClaim(claim: ClaimModel) {
-      self.selectedClaimId = claim && claim.id || undefined;
+      self.selectedClaimId = claim && (claim.id || claim.tempUuid) || undefined;
       self.selectedClaimView = claim && clone(claim) || undefined;
+    },
+    removeClaimFromList(claim: ClaimModel) {
+      const idx = self.claims.indexOf(claim);
+      if (self.selectedClaimId === claim.id || self.selectedClaimId === claim.tempUuid) {
+        self.selectedClaimId = undefined;
+        self.selectedClaimView = undefined;
+
+      }
+      if (idx !== -1) {
+        self.claims.splice(idx, 1);
+      }
+
     }
   }))
   .actions(self => ({
@@ -53,7 +66,8 @@ export const ClaimsStore = types.model({
         self.loading = false;
       }
     })
-  ).actions(self => ({
+  )
+  .actions(self => ({
       load: () => {
         Api.getClaims().then(claims => self.setClaims(claims))
       },
@@ -63,8 +77,23 @@ export const ClaimsStore = types.model({
         }
         self.loading = true;
         const claim = self.selectedClaimView;
-        const isNew = !claim.id;
+        const isNew = claim.isNew;
         Api.saveClaim(getSnapshot(claim)).then(res => self.afterSelectedSave(isNew, res))
+      },
+      removeClaim(claim: ClaimModel) {
+        appStore.confirmStore.ask("Удалить заявку?")
+          .then(res => {
+            if (!res) {
+              return;
+            }
+            if (claim.isNew) {
+              self.removeClaimFromList(claim);
+              return;
+            }
+            Api.removeClaim(claim)
+              .then(() => self.removeClaimFromList(claim));
+          });
+
       }
     })
   );

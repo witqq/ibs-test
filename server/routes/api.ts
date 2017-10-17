@@ -47,6 +47,16 @@ apiRouter.put("/claim/:id", function (req, res, next) {
   res.json(claim);
 });
 
+apiRouter.delete("/claim/:id", function (req, res, next) {
+  const id = req.params.id;
+  const claim = getClaimById(id);
+  if (!claim) {
+    throw new ApiError(404, "Claim not found");
+  }
+  CLAIMS_MOCK.splice(CLAIMS_MOCK.indexOf(claim), 1);
+  res.json(claim);
+});
+
 apiRouter.post("/claim", function (req, res, next) {
   const newClaim: Claim = req.body;
   const claim = mockIdName(newClaim.name) as Claim;

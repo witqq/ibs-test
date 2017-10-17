@@ -8,6 +8,8 @@ import Table, {TableHead, TableRow, TableCell, TableBody} from "material-ui/Tabl
 import {injectStore} from "../../../stores/inject-store";
 import {ClaimsStore, CLAIMS_STORE} from "../../../stores/claims-store";
 import {ClaimCard} from "./claim-card";
+import IconButton from "material-ui/IconButton";
+import DeleteIcon from "material-ui-icons/Delete";
 
 export class Claims extends ObservableComponent {
 
@@ -24,6 +26,7 @@ export class Claims extends ObservableComponent {
               <TableCell/>
               <TableCell>Наименование</TableCell>
               <TableCell>Статус</TableCell>
+              <TableCell/>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -36,6 +39,15 @@ export class Claims extends ObservableComponent {
                   <TableCell>{claim.docNum}</TableCell>
                   <TableCell>{claim.name}</TableCell>
                   <TableCell>{claim.status.name}</TableCell>
+                  <TableCell>
+                    <IconButton aria-label="Delete"
+                                onClick={(ev) => {
+                                  claimsStore.removeClaim(claim);
+                                  ev.stopPropagation();
+                                }}>
+                      <DeleteIcon/>
+                    </IconButton>
+                  </TableCell>
                 </TableRow>
               );
             })}

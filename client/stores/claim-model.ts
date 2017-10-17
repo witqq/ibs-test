@@ -8,34 +8,45 @@ export const ClaimModel = types.model({
     docNum: types.optional(types.string, ""),
     name: types.optional(types.string, ""),
     id: types.optional(types.string, ""),
+    // идентификатор для еще не сохраненных заявок
+    tempUuid: types.optional(types.string, ""),
     from: types.maybe(PersonModel),
     to: types.maybe(PersonModel),
     status: types.maybe(StatusModel)
 
   }
-).actions(self => ({
-  setName(name: string) {
-    self.name = name;
-  },
-  setDocNum(docNum: string) {
-    self.docNum = docNum;
-  },
-  setFrom(person: Person) {
-    self.from = PersonModel.create(person);
-  },
-  setTo(person: Person) {
-    self.to = PersonModel.create(person);
-  },
-  setStatus(status: ClaimStatus) {
-    self.status = StatusModel.create(status);
-  }
-}));
+)
+  .actions(self => ({
+    setName(name: string) {
+      self.name = name;
+    },
+    setDocNum(docNum: string) {
+      self.docNum = docNum;
+    },
+    setFrom(person: Person) {
+      self.from = PersonModel.create(person);
+    },
+    setTo(person: Person) {
+      self.to = PersonModel.create(person);
+    },
+    setStatus(status: ClaimStatus) {
+      self.status = StatusModel.create(status);
+    }
+  }))
+  .views(self => ({
+    get isNew(): boolean {
+      return !self.id
+    }
+  }));
 
 export type ClaimModel = typeof ClaimModel.Type;
 
 export function claimChanged(claim1: ClaimModel, claim2: ClaimModel): boolean {
   if (!claim1 || !claim2) {
     return false;
+  }
+  if (!claim1.id && claim1.tempUuid) {
+    return true;
   }
   return claim1.docNum !== claim2.docNum
     || claim1.name !== claim2.name
