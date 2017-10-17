@@ -25,7 +25,6 @@ const config = {
 
     plugins: [
         new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             title: "react-hot-ts",
             chunksSortMode: "dependency",
