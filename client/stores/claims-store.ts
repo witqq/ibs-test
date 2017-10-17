@@ -29,6 +29,7 @@ export const ClaimsStore = types.model({
       self.selectedClaimId = claim && (claim.id || claim.tempUuid) || undefined;
       self.selectedClaimView = claim && clone(claim) || undefined;
     },
+
     removeClaimFromList(claim: ClaimModel) {
       const idx = self.claims.indexOf(claim);
       if (self.selectedClaimId === claim.id || self.selectedClaimId === claim.tempUuid) {
@@ -43,6 +44,10 @@ export const ClaimsStore = types.model({
     }
   }))
   .actions(self => ({
+      addClaimToList(claim: ClaimModel) {
+        self.claims.push(claim);
+        self.setSelectedClaim(claim);
+      },
       setClaims(claims: Array<Claim>) {
         self.claims.clear();
         claims.forEach(claim => self.claims.push(ClaimModel.create(claim)));
@@ -51,10 +56,16 @@ export const ClaimsStore = types.model({
         if (self.loading) {
           return;
         }
+        if (self.selectedClaimId === claim.id || self.selectedClaimId === claim.tempUuid) {
+          return;
+        }
         if (self.selectedChanged) {
           return appStore.confirmStore.ask("Изменения будут потеряны, продолжить?")
             .then(res => {
               if (res) {
+                if (self.selected && self.selected.isNew) {
+                  self.removeClaimFromList(self.selected);
+                }
                 self.setSelectedClaim(claim)
               }
             })
@@ -94,6 +105,27 @@ export const ClaimsStore = types.model({
               .then(() => self.removeClaimFromList(claim));
           });
 
+      },
+      addClaim() {
+
+        let promise = Promise.resolve(true);
+        if (self.selectedChanged) {
+          promise = appStore.confirmStore.ask("Изменения в текущей выбранной заявке будут потеряны,  продолжить?")
+        }
+
+        promise.then(res => {
+          if (!res) {
+            return;
+          }
+          if (self.selected && self.selected.isNew) {
+            self.removeClaimFromList(self.selected);
+          }
+          const claim = ClaimModel.create();
+          claim.generateUuid();
+          claim.setName("Новая заявка");
+          claim.setDocNum(`#${self.claims.length + 1}`);
+          self.addClaimToList(claim);
+        })
       }
     })
   );

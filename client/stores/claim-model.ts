@@ -3,6 +3,7 @@ import {PersonModel} from "./person-model";
 import {StatusModel} from "./status-model";
 import {Person} from "../../share/data/interfaces/person";
 import {ClaimStatus} from "../../share/data/interfaces/claim-status";
+import v4 = require("uuid/v4");
 
 export const ClaimModel = types.model({
     docNum: types.optional(types.string, ""),
@@ -31,6 +32,9 @@ export const ClaimModel = types.model({
     },
     setStatus(status: ClaimStatus) {
       self.status = StatusModel.create(status);
+    },
+    generateUuid() {
+      self.tempUuid = v4();
     }
   }))
   .views(self => ({

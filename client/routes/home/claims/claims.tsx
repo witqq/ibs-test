@@ -10,6 +10,7 @@ import {ClaimsStore, CLAIMS_STORE} from "../../../stores/claims-store";
 import {ClaimCard} from "./claim-card";
 import IconButton from "material-ui/IconButton";
 import DeleteIcon from "material-ui-icons/Delete";
+import {autobind} from "core-decorators";
 
 export class Claims extends ObservableComponent {
 
@@ -38,7 +39,7 @@ export class Claims extends ObservableComponent {
                           selected={claimsStore.selected === claim}>
                   <TableCell>{claim.docNum}</TableCell>
                   <TableCell>{claim.name}</TableCell>
-                  <TableCell>{claim.status.name}</TableCell>
+                  <TableCell>{claim.status && claim.status.name}</TableCell>
                   <TableCell>
                     <IconButton aria-label="Delete"
                                 onClick={(ev) => {
@@ -63,10 +64,16 @@ export class Claims extends ObservableComponent {
     );
   }
 
+  @autobind
+  addClaim() {
+    this.claimsStore.addClaim();
+  }
+
   render() {
     return (
       <div className={claims}>
-        <Button fab className="add-button">
+        <Button fab className="add-button"
+                onClick={this.addClaim}>
           <AddIcon/>
         </Button>
         <Grid container spacing={0} className="claims-content">
