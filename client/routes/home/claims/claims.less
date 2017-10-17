@@ -1,9 +1,8 @@
 :local .claims {
   height: 100%;
-  display: flex;
-  flex-direction: column;
 
   :global {
+
     .add-button {
       position: fixed;
       z-index: 4000;
@@ -14,17 +13,44 @@
     }
 
     .claims-content {
-      flex: 1 1 100%;
+      height: 100%;
+      background-color: white;
+      .header {
+        color: white;
+        flex: 0 0 auto;
+        height: 80px;
+        .tittle {
+          flex: 1;
+        }
+      }
       .claims-list-container {
+        flex: 1 1 100%;
+        display: flex;
+        flex-direction: column;
         background-color: white;
+        .claims-list-header {
+          padding-left: 90px;
+          background-color: #03A9F4;
+        }
         .claims-list {
-          height: 100%;
+          flex: 1 1 100%;
           overflow-y: auto;
         }
       }
 
-      .claim-info {
-        padding: 8px;
+      .claims-card-container {
+        transition: visibility 1000ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        display: flex;
+        flex-direction: column;
+        .claims-card-header {
+          background-color: #069bde;
+        }
+        .claim-info {
+          background-color: #eaeaea;
+          flex: 1 1 100%;
+          height: 100%;
+          overflow-y: auto;
+        }
       }
     }
 

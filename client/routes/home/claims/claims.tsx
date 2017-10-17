@@ -11,6 +11,8 @@ import {ClaimCard} from "./claim-card";
 import IconButton from "material-ui/IconButton";
 import DeleteIcon from "material-ui-icons/Delete";
 import {autobind} from "core-decorators";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
 
 export class Claims extends ObservableComponent {
 
@@ -70,19 +72,34 @@ export class Claims extends ObservableComponent {
   }
 
   render() {
+    const isSelected = !!this.claimsStore.selected;
     return (
       <div className={claims}>
         <Button fab className="add-button"
                 onClick={this.addClaim}>
           <AddIcon/>
         </Button>
+
         <Grid container spacing={0} className="claims-content">
-          <Grid item xs={6} className="claims-list-container">
+          <Grid item xs={isSelected && 6 || 12} className="claims-list-container">
+            <Toolbar className="header claims-list-header">
+              <Typography type="title" color="inherit" className="headline">
+                Реестр заявок
+              </Typography>
+            </Toolbar>
             {this.renderList()}
           </Grid>
-          <Grid item xs={6} className="claim-info">
-            {this.renderCard()}
-          </Grid>
+          {isSelected &&
+          <Grid item xs={6} className="claims-card-container" style={{width: isSelected ? undefined : 0}}>
+            <Toolbar className="header claims-card-header">
+              <Typography type="title" color="inherit" className="headline">
+                {this.claimsStore.selected.name}
+              </Typography>
+            </Toolbar>
+            <div className="claim-info">
+              {this.renderCard()}
+            </div>
+          </Grid> || null}
         </Grid>
       </div>
     );

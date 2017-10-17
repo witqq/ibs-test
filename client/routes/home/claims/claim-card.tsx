@@ -1,6 +1,6 @@
 import {ObservableComponent} from "../../../utils/mobx/ObservableComponent";
 import {ClaimModel} from "../../../stores/claim-model";
-import Card, {CardContent, CardActions} from "material-ui/Card";
+import {CardContent, CardActions} from "material-ui/Card";
 import TextField from "material-ui/TextField";
 import * as React from "react";
 import {ChangeEvent, FormEvent} from "react";
@@ -13,6 +13,7 @@ import {PersonSelectControl} from "../../../controls/person-select-control";
 import {StatusSelectControl} from "../../../controls/status-select-control";
 import {ClaimStatus} from "../../../../share/data/interfaces/claim-status";
 import {Person} from "../../../../share/data/interfaces/person";
+import Typography from "material-ui/Typography";
 
 export class ClaimCard extends ObservableComponent {
   @injectStore(CLAIMS_STORE)
@@ -65,13 +66,13 @@ export class ClaimCard extends ObservableComponent {
   render() {
     if (!this.view) {
       return (
-        <div>
+        <Typography>
           Выберите заявку для редактирования
-        </div>
+        </Typography>
       );
     }
     return (
-      <Card>
+      <div>
         <CardContent>
           <TextField label="Номер"
                      value={this.view.docNum}
@@ -106,7 +107,7 @@ export class ClaimCard extends ObservableComponent {
             Сохранить
           </Button>
         </CardActions>
-      </Card>
+      </div>
     );
   }
 }

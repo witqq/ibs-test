@@ -32,7 +32,7 @@ export default class App extends Component {
                   justify="center"
                   spacing={0}>
               <Grid item xs={12} lg={12} className="app-container">
-                <AppHeader className="app-header"/>
+                {/*<AppHeader className="app-header"/>*/}
                 <div className="app-main">
                   {this.renderRoutes()}
                 </div>
