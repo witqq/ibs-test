@@ -13,9 +13,9 @@ export class AppHeader extends ObservableComponent<AppHeaderProps> {
   render() {
     return (
       <AppBar position="static" className={this.props.className}>
-        <Toolbar>
-          <Typography type="title" color="inherit" className="tittle">
-            React app
+        <Toolbar className="header-toolbar">
+          <Typography type="title" color="inherit" className="headline">
+            Реестр заявок
           </Typography>
         </Toolbar>
       </AppBar>

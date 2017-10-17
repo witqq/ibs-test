@@ -12,6 +12,7 @@ import "normalize.css/normalize.css"
 import {app} from "./app.less";
 
 export const appStore = AppStore.create();
+appStore.load();
 
 export default class App extends Component {
 
@@ -29,7 +30,7 @@ export default class App extends Component {
                   direction="row"
                   justify="center"
                   spacing={0}>
-              <Grid item xs={12} lg={9} className="app-container">
+              <Grid item xs={12} lg={12} className="app-container">
                 <AppHeader className="app-header"/>
                 <div className="app-main">
                   {this.renderRoutes()}

@@ -32,24 +32,23 @@ apiRouter.get("/claim/:id", function (req, res, next) {
   res.json(claim);
 });
 
-apiRouter.post("/claim/:id", function (req, res, next) {
+apiRouter.put("/claim/:id", function (req, res, next) {
   const id = req.params.id;
   const claim = getClaimById(id);
   if (!claim) {
     throw new ApiError(404, "Claim not found");
   }
-  const newClaim: Claim = req.body.claim;
+  const newClaim: Claim = req.body;
   claim.name = newClaim.name;
   claim.status = newClaim.status;
   claim.from = newClaim.from;
   claim.to = newClaim.to;
   claim.docNum = newClaim.docNum;
-
   res.json(claim);
 });
 
-apiRouter.put("/claim", function (req, res, next) {
-  const newClaim: Claim = req.body.claim;
+apiRouter.post("/claim", function (req, res, next) {
+  const newClaim: Claim = req.body;
   const claim = mockIdName(newClaim.name) as Claim;
   claim.status = newClaim.status;
   claim.from = newClaim.from;

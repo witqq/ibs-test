@@ -1,6 +1,7 @@
 import Axios, {AxiosRequestConfig} from "axios";
 import {appStore} from "../app";
 import {API_PATH} from "../../share/constants";
+import {Claim} from "../../share/data/interfaces/claim";
 
 Axios.defaults.baseURL = API_PATH;
 
@@ -34,15 +35,32 @@ export interface MyRequestConfig {
 
 export class Api {
 
-  private static async post<T>(url: string, args): Promise<T> {
+  private static post<T>(url: string, args): Promise<T> {
     return Axios.post(url, args).then(res => res.data);
   }
 
-  private static async Get<T>(url: string, myConfig?: MyRequestConfig): Promise<T> {
+  private static Get<T>(url: string, myConfig?: MyRequestConfig): Promise<T> {
     return Axios.get(url, myConfig as AxiosRequestConfig).then(res => res.data)
   }
 
-  public static async test() {
+
+  private static put<T>(url: string, args): Promise<T> {
+    return Axios.put(url, args).then(res => res.data);
+  }
+
+
+  public static test() {
     return this.Get<WithMessage>("test");
+  }
+
+  public static getClaims() {
+    return this.Get<Array<Claim>>("claims");
+  }
+
+  public static saveClaim(claim: Claim) {
+    if (!claim.id){
+      return this.post<Claim>("claim", claim);
+    }
+    return this.put<Claim>(`claim/${claim.id}`, claim);
   }
 }

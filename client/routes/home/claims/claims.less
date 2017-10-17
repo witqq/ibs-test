@@ -4,18 +4,25 @@
   flex-direction: column;
 
   :global {
-    .claims-toolbar {
-      flex: 0 0 auto;
-      padding-left: 4px;
+    .add-button {
+      position: fixed;
+      z-index: 4000;
+      top: 50px;
+      left: 20px;
+      background-color: rgb(24, 255, 255);
+      color: rgb(12, 127, 127);
     }
+
     .claims-content {
       flex: 1 1 100%;
-      .claims-list {
-        overflow-y: auto;
-        height: 100%;
-        padding-top: 0;
-        padding-bottom: 0;
+      .claims-list-container{
+        background-color: white;
+        .claims-list {
+          height: 100%;
+          overflow-y: auto;
+        }
       }
+
       .claim-info {
         padding: 8px;
       }

@@ -2,6 +2,35 @@
 # yarn lockfile v1
 
 
+"@devexpress/dx-core@1.0.0-alpha.11":
+  version "1.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-core/-/dx-core-1.0.0-alpha.11.tgz#3b3ece91fbcbe2a2b485195ea3b2e0c30bb8d2e2"
+
+"@devexpress/dx-grid-core@1.0.0-alpha.11":
+  version "1.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-grid-core/-/dx-grid-core-1.0.0-alpha.11.tgz#f09d8f2098583f141b10d58aa303fd861ad86143"
+
+"@devexpress/dx-react-core@^1.0.0-alpha.11":
+  version "1.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-core/-/dx-react-core-1.0.0-alpha.11.tgz#569b5e443a7351dae8e0d01e9ba5bf4d8f8c1359"
+  dependencies:
+    "@devexpress/dx-core" "1.0.0-alpha.11"
+    prop-types "^15.6.0"
+
+"@devexpress/dx-react-grid-material-ui@^1.0.0-alpha.11":
+  version "1.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-grid-material-ui/-/dx-react-grid-material-ui-1.0.0-alpha.11.tgz#d0dfb43b9978ba5f693830988f40479dc18f98c2"
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.0"
+
+"@devexpress/dx-react-grid@^1.0.0-alpha.11":
+  version "1.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-grid/-/dx-react-grid-1.0.0-alpha.11.tgz#c12e61f76f2441688d1357246da01f9a59a7954a"
+  dependencies:
+    "@devexpress/dx-grid-core" "1.0.0-alpha.11"
+    prop-types "^15.6.0"
+
 "@types/axios@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"
