@@ -2,6 +2,7 @@ let __extends = (this && this.__extends) || function (d, b) {
   for (let p in b) if (b.hasOwnProperty(p)) {
     d[p] = b[p];
   }
+
   function __() {
     this.constructor = d;
   }
@@ -11,6 +12,7 @@ let __extends = (this && this.__extends) || function (d, b) {
 
 export const BaseException = (function (_super) {
   __extends(Exception, _super);
+
   function Exception(msg) {
     _super.call(this, msg);
   }

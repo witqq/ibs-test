@@ -1,17 +1,15 @@
 import * as express from "express";
 import * as path from "path";
-import bodyParser = require("body-parser");
 import {initApiRouter} from "../routes/api";
+import bodyParser = require("body-parser");
 
 export function initApp() {
   const app = express();
-
 
   const root = path.resolve("static");
   app.use(express.static(root));
 
   app.use(bodyParser());
-
 
   initApiRouter(app);
 

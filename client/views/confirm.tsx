@@ -14,12 +14,12 @@ export class Confirm extends ObservableComponent {
   confirmStore: ConfirmStore;
 
   @autobind
-  cancel(){
+  cancel() {
     this.confirmStore.onCancel();
   }
 
   @autobind
-  ok(){
+  ok() {
     this.confirmStore.onOk();
   }
 
