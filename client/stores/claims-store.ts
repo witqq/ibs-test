@@ -2,6 +2,7 @@ import {types, clone, applySnapshot, getSnapshot} from "mobx-state-tree";
 import {ClaimModel, claimChanged} from "./claim-model";
 import {Api} from "../api/api";
 import {Claim} from "../../share/data/interfaces/claim";
+import {appStore} from "../app";
 
 export const CLAIMS_STORE = "claimsStore";
 
@@ -9,6 +10,7 @@ export const ClaimsStore = types.model({
   claims: types.optional(types.array(ClaimModel), []),
   loading: types.optional(types.boolean, false),
   selectedClaimId: types.maybe(types.string),
+  // копия выбранной заявки, которая отображается на форме и не меняет данные первоначальной
   selectedClaimView: types.maybe(ClaimModel)
 })
   .views(self => ({
@@ -22,16 +24,29 @@ export const ClaimsStore = types.model({
     }
   }))
   .actions(self => ({
+    setSelectedClaim(claim: ClaimModel) {
+      self.selectedClaimId = claim && claim.id || undefined;
+      self.selectedClaimView = claim && clone(claim) || undefined;
+    }
+  }))
+  .actions(self => ({
       setClaims(claims: Array<Claim>) {
         self.claims.clear();
         claims.forEach(claim => self.claims.push(ClaimModel.create(claim)));
       },
-      selectClaim(claim: ClaimModel) {
+      onSelectClaim(claim: ClaimModel) {
         if (self.loading) {
           return;
         }
-        self.selectedClaimId = claim && claim.id || undefined;
-        self.selectedClaimView = claim && clone(claim) || undefined;
+        if (self.selectedChanged) {
+          return appStore.confirmStore.ask("Изменения будут потеряны, продолжить?")
+            .then(res => {
+              if (res) {
+                self.setSelectedClaim(claim)
+              }
+            })
+        }
+        self.setSelectedClaim(claim);
       },
       afterSelectedSave(isNew: boolean, saved: Claim) {
         applySnapshot(self.selected, saved);

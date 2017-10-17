@@ -17,7 +17,7 @@ const config = {
     },
 
     // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
+    devtool: "eval",
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
@@ -99,7 +99,7 @@ const config = {
     devServer: {
         hot: true,
         port: 3000,
-        proxy:{
+        proxy: {
             "/api": "http://localhost:8080"
         },
         historyApiFallback: true

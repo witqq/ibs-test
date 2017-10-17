@@ -10,6 +10,7 @@ import {AppHeader} from "./views/app-header";
 import {SnackBarView} from "./views/snack-bar-view";
 import "normalize.css/normalize.css"
 import {app} from "./app.less";
+import {Confirm} from "./views/confirm";
 
 export const appStore = AppStore.create();
 appStore.load();
@@ -36,6 +37,7 @@ export default class App extends Component {
                   {this.renderRoutes()}
                 </div>
                 <SnackBarView/>
+                <Confirm/>
               </Grid>
             </Grid>
           </div>

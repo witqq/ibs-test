@@ -30,7 +30,7 @@ export class Claims extends ObservableComponent {
             {claimsStore.claims.map(claim => {
               return (
                 <TableRow key={claim.id}
-                          onClick={() => claimsStore.selectClaim(claim)}
+                          onClick={() => claimsStore.onSelectClaim(claim)}
                           hover
                           selected={claimsStore.selected === claim}>
                   <TableCell>{claim.docNum}</TableCell>
